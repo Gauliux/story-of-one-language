@@ -1,0 +1,851 @@
+
+;; DRYLANG
+
+import <STDLIB> : x, y, z;
+import "./my/test/test" : for_work;
+
+;; val, def, return, import
+;; `[]` `""` `''` `<>` `+` `=` `-`
+
+def test[list] ->
+{
+	[x,y,z] <- list
+	return x + y + test
+}
+
+def type TCell struct -> {
+	val int x, y
+}
+
+val TCell test := {x: 10, y: 123}
+
+test[(TCell{x:10, y:10}, TCell{x:})]
+
+;;=====================================================
+
+
+;; C kind Type System + prebuilt 8,16,32,64,128...
+
+
+namespace hide {
+
+	private val int;
+	private val float;
+
+}
+
+;; byte <= short <= int <= long
+;; 8 <= 16 <= 32 <= 64 ?
+
+;; int8 int16 int32 int64 int128 int256 iint
+;; float8 float16 float64 float128 float256
+
+
+def function 
+-> int
+<- (list)
+{
+	def (x,y,z) from list
+	return x + y + z
+}
+
+calculate_row_length[a, b, c].
+[a,b,c] = [a,b,c] ? then print["test", "words"];
+
+val function_pointer.
+mem function_pointer = &foo.
+
+val x.
+def x (a,b) a + b.
+print[x[10, 20], " ", " - WOW!"].
+mem x = 10 ? print["alright"] else mem x = die.
+
+val a,b,c,d,e,f ;; each litera is nullptr
+mem a = "teststring" ;; allocated 10 byte
+mem b = "secondstring"
+mem c = a + b ;; string=list => c is another list, or c is a pair of pointers?
+a = 230 ;; reallocated 
+
+;; `mut` mutable, `mem` memory, `val` value, `def` define
+;; return, public, private, for, each ...
+
+{
+	
+	val unsigned int8 x
+	val z
+}
+
+;; ============================================
+
+import <STDLIB> : std
+
+namespace prikol, def prikol
+{
+	
+	public int8 first[int8, int8]
+	public int8 second[int8, int8]
+	public int8 third[ptr_a,ptr_b], def third
+	[
+		print['a'], print['\n'],
+		return first[ptr_a] + second[ptr_b].
+	].
+	
+}.
+
+void main print["Hello, World!"].
+void main { print["Hello, World!"]; print["NIGGUS!"] }.
+
+void main
+{
+	
+	val mem int32 counter, counter := 10.
+	val counter2, mem int16 counter2 0.
+	
+	val a, mem a (10 20 30), mut a.
+	def b (40 50 60).
+	
+	print[prikol::first[10,20]].
+	print[prikol::first[10,20]].
+	print[prikol::third[a, b]].
+	
+	use namespace prikol.
+	
+	def third[a,b] ? 
+		result = 0 { print["die"] }, 
+		result = 1 { print["pussy"] }, 
+		result = 2 { result }, 
+		result = 3 { return }.
+
+	def third[a,b] ? 
+		0 { print["die"] }, 
+		1 { print["pussy"] }, 
+		2 { result }, 
+		3 { return }.
+	
+	;:
+		() - only for lists
+		[] - only for calls/addresses order
+		{} - only for blocks
+		
+		def - compile time
+		val - pointer, run time
+	:;
+	
+	;; Однозначность.
+}
+
+
+
+module Prikolbas.
+
+public int8 third[float,float].
+public int16 second[int8,int8].
+private int test[], def test { print["HEY!"] }.
+
+
+
+;; in other fil
+
+import <Prikolbas>.
+
+namespace hard, def hard (first[2], second[1], third[3]).
+
+mut public int8 hard::first[2], def first[a,b]
+{
+	a := (a + 20).
+	return a + b.
+}
+
+public auto first[2], def first[ auto a, auto b]
+{
+	a := (a + 20).
+	return a + b.
+}
+
+;; include vs import
+
+;; I'm fucking disappointed.
+;; Purity - important?
+
+
+module [ "TEST" ].
+
+import [ "stdlib.lib" ].
+
+void main, def main 
+{
+	def test [10, 20, 30, 40, 50].
+	
+	int8 i = alloc[10*int8].
+	
+	i:0 = 20.
+	i:1 = 30.
+	i:3 = 40.
+	i:4 = 50.
+	
+	loop j, def j [FROM:0:TO:10]
+	{
+		i:j = j + 2 * 1.
+	}
+}
+
+
+;;
+
+module ("TEST")
+
+import ("stdlib.lib", "stdio.lib")
+import ("math.lib")
+
+namespace my
+{
+	int8 first(a,b) -> return a + b.
+	
+	int16 second(a,b)
+	{
+		a += 20
+		return a < b
+	}
+}
+
+;;
+
+print["Hello, World"].
+
+def get_id [n] [ print[n], print[n], print[n], print[n] ].
+
+def int8 ret_2 [ int8 a, int8 b] [ return a + b ].
+
+def auto ret_3 [args()] [ def i from 0 to 10 [] ].
+
+print[ret_2[10, 20]].
+
+;; fuck... we have a problem... the float numbers has a dot... 10.23, 30.45, ...
+
+module ["TEST"]; ;; compiling to linker  tips
+
+import ["math.h"]; ;; compiling to linker  tips 
+
+public namespace first {};
+public int8 first::first;
+private int16 first::second;
+
+;; ===============================================
+;; Lisp-forch
+
+module ["TEST"]
+
+import ["math.lib"]
+
+link ["my.h", "smt/smt.h"]
+
+namespace test
+[
+	void first,
+	void second,
+	void third
+]
+
+int8 test [[a,b] [print["test"]]]
+
+namespace [prikol, [first, second, third]];
+
+def [test_function : void ,{
+	print["Test"];
+	print["It works!"];
+	print["Meh"];
+	{
+	
+	}
+}];
+
+def [prikol::first:int8, [int a], {
+	int8 [a, 10];
+	set [a, 20];
+	return [a];
+}];
+
+def [ void [main, [int[a], int[b]], { print[a]; print[b]; print[prikol::first[894]]; } ]];
+def [ void [test, [], return[0]]];
+
+namespace [test, [first, second, third]]
+def [test::first, void[print["prikol"]]]
+
+def void test::first [ auto a, auto b] 
+def void test::first [ auto a, auto b, auto c] 
+;; in Lisp we can just redefine everuthing... 
+
+
+;; DO[(def void test::second [ auto args ]), (void { ... }) ]
+def void test::second [ auto args ], kill me :(
+
+
+
+;;;;;;;;;;;;;;;;;
+
+
+def ( int , main , [] {
+	print("HELLO!");
+	return 0;
+});
+
+int main ()
+{
+	print("HELLO!");
+	return 0;
+}
+
+
+#include <stdlib.h>
+
+int main() { int arr[] = {1,2,3,4,5}; for(int i = 0; i < sizeof(arr)/sizeof(arr[0]); i++) { printf("%d\n", i); } return 0; }
+
+;;
+
+def [int[main, [], { var [intptr[arr]], var [int[i]]; set [arr, {1,2,3,4,5}]; set [i, 0]; for [i, pars[addr[arr[0]]], { print[i]; }]; }]];
+
+def[int[main, [], {
+	
+	def[int[test, [a, b], {
+		return [test[a + b, b + a]];
+	}]];
+	
+	var[char[word]];
+	alloc[word, mul[10, sizeof[char]]];
+	set[word:0, 'a'];
+	set[word:1, 'p'];
+	set[word:2, 'p'];
+	set[word:3, 'l'];
+	set[word:4, 'e'];
+	set[word:5, '\0'];
+	
+	val[const[a, "apple"]];
+	def[string[word]];
+	set[string, a];
+	return [0];
+}]];
+
+;; много запятых :'>
+
+def [main, [a,b], {
+	print[@12];
+}];
+
+int main(a,b)
+{
+
+}
+
+
+;; end of LISP-branch
+;; ===============================================
+
+;; Clear-lisp
+;; ===============================================
+def plus(a:int, b:auto)
+{
+	return (float (a + b));
+}
+
+def main 
+{
+	print (plus 1,2);
+	print "test", 1, (plus 1,2), 3;
+	return 0;
+}
+
+namespace[test, {
+	def[prikol, (a b), return[a+b]];
+	def[prikol1, (a b), return[a+b]];
+}];
+
+def[test, {
+	return[int[prikol]];
+}];
+
+;; params, args, etc.
+MAIN[test, variable[], {
+	int[i];
+	while[i > 10, {
+		print[i];
+	}];
+}];
+
+struct[test, @1, @2, {
+	def[word, string];
+	def[a, int];
+}];
+
+var[a, test[10, 20]];
+
+;;
+
+defun[prikol, return[int[@1 + @2]]];
+
+;; Нужно добавить обозначения для сложных структур
+
+;; В данном случае defstruct является оболочкой для следующей констуркции \
+def[name, return[struct[|:smt: a, :smt: b, :smt: c|]];
+defstruct[name, struct[||]];
+name[x];
+set[x.a, 20 + 20 + 0xFFF];
+
+;; Необходимо определить достаточное количество абстракций для реализации оболочек над типами данных
+
+;; ===============================================
+
+reg[main];
+begin[main];
+	var[x, 10];
+	x += 20;
+	return[x];
+end[main];
+
+;; ===============================================
+
+sub TEST begin
+
+	var x, y
+	;;
+	x = "test"
+	;; char ptr (8 bit pointer) -> uint8/int8
+	x = 10
+	x = 20
+	
+	print addr x 	;; => 't'
+					;; auto allocated memory
+	
+end.
+
+namespace test
+{
+	namespace prikol1
+	{
+		
+	}
+	
+	namespace prikol2
+	{
+
+	}
+}
+
+
+def[prikol, args[int`a, int`b], {
+	var[int`i];
+	for[@i, 4, 10, {
+		@a = @i + @b;
+	}];
+	return[@a + @b];
+}];
+
+private namespace begin
+	public int f1;
+	public float f2;
+	public int8 f3;
+	
+	public namespace drive begin
+		public int f1;
+		public float f2;
+		public int8 f3;
+		
+		public namespace drive begin
+			public int f1;
+			public float f2;
+			public int8 f3;
+		end.
+	end.
+end.
+
+public namespace test begin
+
+	private function test <- (a, b) -> (int,int) 
+	begin
+		
+	end
+	
+end
+
+;;datatypes: atom, tuple, ..., block, var *
+def[main`int8, mods[public], {
+	args[a`int, b`int, c`int];	
+}];
+
+def x, 10;
+def x, 0xFFFFFFFFFFFFFFF;
+
+def public prikol, (args a, b, c), {
+	if ? @a == 4, {
+	
+	};
+	return int8 @a + @b + @c;
+};
+
+print (prikol 10, 20, 'a'), "text", (prikol 1, 1, 1);
+
+;; 
+
+import (from "fucking_hell", prikol, x), (from "smt", test, smt);
+include "fucking_hell";
+
+print (prikol x, x, x), "\n"; ;; error: x isn't public
+
+def ELEM, {
+	return (struct :name @name, :id @id);
+};
+
+def x, (ELEM "Prikol", 1);
+def i, (ELEM "Prikol", 2);
+def y, (struct :name "Prikol", :id 3);
+
+print i:name;
+
+def test, {
+	var i;
+	
+	for i=0, (length @args), {
+		print @args[i];
+	};
+};
+
+def public pop, {
+	var res;
+	res = (last *@stack);
+	delete *@stack, (len *@stack)-1;
+	return res;
+};
+
+def mega, {
+	
+	return @a + @b;
+};
+
+;; ===========================
+
+;;./my.code
+def my_programm, {
+	args a;
+	
+	print @a;	
+	return true;
+};
+
+;;somwhere
+def std_smt, call "STD::std_smt";
+
+;;
+include "my";
+
+my_programm 10;
+
+type ELEM, (tuple :name, ); ;; Возможно компилятору будет проще работать\
+с конкретными правила описания, так как к ним проще обращаться? Либо же, вне\
+языка должны существовать свои конструкции - в случае чего, в ряду отсутствия\
+надобности, можно отказаться от излишка в структурах и возложить всё на интерпритацю\
+компилятора.
+
+def ELEM, return ( tuple :name @name , :id @id );
+
+deftype ELEM, (
+tuple
+	:name :string @name, 
+	:id :int @id 
+); ;;???
+
+
+def :int main, {
+
+	var a, b;
+	
+	@a = (ELEM :name "Prikol", :id 200);
+	@b = (tuple :name "TEST", :id "WORD");
+	
+	var c;
+	c = int 10 + 20.8 + 0.2;
+	c = float 0.2 + 2;
+	c = tuple 20, 20; ;; До сих пор нет идеи о том, как именно стоит объявлять\
+	функции с переменным кол-вом входящих значений.\
+	В этом есть полная необходимость, так как иначе становиться слишком сложно\
+	объяснять встроенные функции :/
+	
+	print @a:name, @a:id ; ;; <>:name = <>:1
+	print @b:name, @b:id ; ;; Что ж, в таком случае, тяжко становиться анализатору\
+	кода, по причине того, что: как фиксировать промежуточные обращения к переменным?
+	
+	var dim;
+	
+	@dim = [ :point [20,30], 20, 30, 40, 50]; ;; [] - константные (размер) массивы.
+	@dim = array`int 20, (array`int 40, 0`int);
+	@dim = array 20, (array 40, :int 0);
+	
+	length( @dim:point );
+	return true;
+};
+
+
+tip prikol, {
+	
+};
+
+def :prikol Test1, {
+
+	args a, b;
+	
+	@a = @a + @b;
+	
+	def x, 10; ;; now x will be declared once and always will be here.
+	
+	x += @a; ;; So x is a static value, which was declared inside the function,\
+	here's no need for using '@'-prefix.
+	
+	return x;
+};
+
+;; def = static in C
+
+def :entry MAIN, {
+	
+};
+
+def x, list; ;; x = 0; list -> allocate space zero-determinative element;
+
+import "std/lists";
+import "std/io";
+
+use #std-list;
+use :namespace std_list;
+use :namepsace std_io;
+
+add x, "message";
+add x, 20;
+add x, 30;
+add x, 40;
+
+del x, 2;
+
+off :namespace std_list;
+
+;;
+
+def a, 0;
+def b, 1;
+def c, 2;
+
+args a,b,c; ;; picks from stack and declare as variable
+			;; can I just use them from stack? or I need to allocate\
+			memory for them?
+
+var a,b,c;
+var r;
+
+{
+	@r = !atom;
+	
+	var alpha;
+	
+	@alpha = ? @r, 0, 1;	
+}
+
+@a = float 12.12;
+@a = int @a;
+
+def set_another_param, {
+	tips :test, :prikol, :not-funny;
+	
+	static a, 0b00000000;
+	
+	;; how to insert bits of tips inside the value a?
+	
+	push a;
+	
+	call "set_another_param";
+	call "clear_stack";
+};
+
+def another_function, {
+	args x;
+	var i;
+	
+	for @i, 0, (size @x), { ;; @x - указатель на константное значение, и ни \
+							сомтря на это, мы всё равно не можем знать длинну\
+							так как потребуется разлечать данные как-то в \
+							памяти :/
+		print @x:@i ;
+	};
+	return true ;
+};
+
+
+another_function [10, 20, 30, 40];
+another_function (tuple [20, 'a']);
+;; no types? -> no *responsibility
+;; => problems with stack, I guess :'/
+
+set_another_param :test;
+set_another_param :prikol;
+set_another_param :not-funny;
+
+;; #max <- a <- b -> (? a>b, <code>)
+;; macroses are not a part of a lnaguage, so they can use their own syntax.
+;; until the base of language hasn't ready yet, macroses doesn't have any sense.
+
+;; @r is who?
+
+;; Хороший вопрос - а возможно ли этот синтаксис использовать и для \
+работы с интерпритаций, где тип данных будет уже точно не важен?
+
+
+;; чем будут атомы в языке? - возможно просто числовыми значениями как при\
+структуре enum, но при том, они не доступны для логических и  числовых\
+операций.
+
+;; !atom & true : return nothing. just error?
+
+for @i, 0, 10, {
+	when @i==9, @i=!atom;
+	
+	if @i==!atom, print @i;
+};
+
+;; Перегрузка операторов? - POOOOOOOOOOOOG, ведь у тебя слабая типизация :)
+;; float
+
+import "STD/IO";
+
+def game_screen_draw, {
+	args a, b;
+	
+	;; Каждая переменная - указатель. А если значение на стеке?\
+	Сделать дубликат и выделить память? Сделать константыми? \
+	Получить указатель на ячейку памяти стека, а потом \
+	использовать его, чтобы всё слетело нахуй, pog?
+	
+	var i;
+	
+	;; Может всё таки различать временные значения и ... ?
+	
+	? a==b, <>, <>; ;; a==b известно во время компиляции или \
+	в процессе исполнения только постигается?
+	
+	? @a == 10, {
+		print @a;
+		return -1;
+	};
+	
+	;; Синтаксические структуры могут не сразу отвечать на запрос компилятора...?
+	
+	return true;
+};
+
+;; А может нам нужно меньще знаков припинаний? \
+Словно глаза режет
+
+;; true & false - фукнции
+
+;; @a == (dec 0), => @a == true, ?
+
+def kill_me, {
+	args @a, @b;
+	var @i, @x, @s;
+	
+	atom !a;
+};
+
+;;
+namesapce ass;
+
+def ass_prikol;
+def ass_test;
+def ass_testPrikol;
+;;
+
+def STRING, 0xFFFFFFAAAFFFAFAFAFAF;
+
+def test, {
+	
+	def nested, {
+		args @a, @b;
+	
+		return @a + @b;
+	};
+	
+	nested 10, 20;
+	
+};
+
+;:
+On almost every system currently in use, heap memory is per-process. 
+On older systems without protected memory, heap memory was system-wide. 
+(In a nutshell, that's what protected memory does: it makes your heap and stack private to your process.)
+:;
+
+def main, {
+
+	args @args;
+	var @i, @a;
+	
+	for :in @i, @args, {
+		print @args:@i;
+	};
+	
+};
+
+;; Как использовать указатели если нет типов? - despair...
+
+
+def kill_me_please, {
+	args px, py, cx, cy, s
+	
+	var addx, addy
+	
+	var amtx = 1, amty = 1
+	
+	if cx > px || cy > py, return false, pass
+	
+	if (cx+s+cx)>px, :true addx = px % cx,
+	:esle {
+		amtx += (px-cx)/(s+cx)
+		addx = (px-cx)%(s+cx)
+	}
+	
+	glPushMatrix
+	glLoadIdentuty
+	glOrtho 0,640, 640,0, -1,1
+	
+	glColor3f 0 , 0 , 0
+	
+	glBegin GL_TRIANGLE_FAN
+		glVertex2f 0	,	0
+		glVertex2f px	,	0
+		glVertex2f px	,	py
+		glVertex2f 0	,	py
+	glEnd
+	
+	var dx = 0
+	var dy = 0
+	
+	POINT A, B
+	
+	for (var y=0), y < amty, y++,
+	{
+		for (var x = 0), x < amtx, x++, {
+			
+			if x==0 && y==0, {
+				dx = 0
+				dy = 0
+				
+				dx = dx + (@addx/2)
+				dy = dy + (@addy/2)
+			}, pass
+			
+			;; <...>
+			
+		}
+	}	
+}
+
+
+def Kill () {
+	
+
+}
