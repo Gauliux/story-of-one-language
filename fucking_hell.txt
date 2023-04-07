@@ -794,37 +794,37 @@ def main, {
 
 
 def kill_me_please, {
-	args px, py, cx, cy, s
+	args px, py, cx, cy, s;
 	
-	var addx, addy
+	var addx, addy;
 	
-	var amtx = 1, amty = 1
+	var amtx = 1, amty = 1;
 	
-	if cx > px || cy > py, return false, pass
+	if cx > px || cy > py, return false, pass;
 	
 	if (cx+s+cx)>px, :true addx = px % cx,
 	:esle {
-		amtx += (px-cx)/(s+cx)
-		addx = (px-cx)%(s+cx)
-	}
+		amtx += (px-cx)/(s+cx);
+		addx = (px-cx)%(s+cx);
+	};
 	
-	glPushMatrix
-	glLoadIdentuty
-	glOrtho 0,640, 640,0, -1,1
+	glPushMatrix;
+	glLoadIdentuty;
+	glOrtho 0,640, 640,0, -1,1;
 	
-	glColor3f 0 , 0 , 0
+	glColor3f 0 , 0 , 0;
 	
-	glBegin GL_TRIANGLE_FAN
-		glVertex2f 0	,	0
-		glVertex2f px	,	0
-		glVertex2f px	,	py
-		glVertex2f 0	,	py
-	glEnd
+	glBegin GL_TRIANGLE_FAN;
+		glVertex2f 0	,	0;
+		glVertex2f px	,	0;
+		glVertex2f px	,	py;
+		glVertex2f 0	,	py;
+	glEnd;
 	
-	var dx = 0
-	var dy = 0
+	var dx = 0;
+	var dy = 0;
 	
-	POINT A, B
+	POINT A, B;
 	
 	for (var y=0), y < amty, y++,
 	{
@@ -840,12 +840,170 @@ def kill_me_please, {
 			
 			;; <...>
 			
-		}
-	}	
+		}	
+	};
 }
 
 
-def Kill () {
+def Kill [] -> {
+	
+	public def kill_me_please (int x, int y) -> int {
+		
+	}
+
+}
+
+
+class Snickers
+
+	@Constructor
+	@Private
+	void Snickers
+		args item1, item2
+		
+		
+	end
+	
+	@Public
+	void sum
+end
+
+
+def @public func (x, y) -> auto {
+	
+} 
+
+namespace Gigas;
+
+let my::x = 10;
+
+let my::test_function = (x, y) -> auto {
+	
+}
+
+loop {
+	? x > 10, 
+}
+
+def ass as Object {
+
+}
+
+let x =
+
+{
+
+}
+
+[] {
+
+}
+
+Object {
+
+}
+
+Struct {
+
+}
+
+Union {
+
+}
+
+include "Test.dll";
+
+def Kill Object {
+	
+	@Public
+	def Kill () -> Kill {
+		
+	}
 	
 
+	let @private x = Object;
+	let @public y = Object;
+
 }
+
+def Main(a,x) {
+	
+	
+	return ( Int a + x );
+}
+
+;; Указатели? Объекты? Гибкость? Простота дополнения реализации?
+
+def test_drive, () {
+	
+	var a = Int 10, b = Float 20;
+	
+	b *= a;
+	
+	return (Int b);
+};
+
+DEF test_drive (a,x) ->
+{
+	
+	RETURN 10;
+}
+
+let i = Int 10;
+
+def SPerson = struct {
+	int id;
+	float pin;
+};
+
+def main = () -> Int {};
+
+;;
+
+include "stdlib.h" "stdio.h";
+
+def ELEM = type struct {
+	def @void* content;
+	def @int size;
+};
+
+def OBJ = type struct {
+	def @ELEM elem;
+	
+	def @int index;
+	def @OBJ prev;
+	def @OBJ next;
+};
+
+def HNDL = struct {
+	def length;
+	def head = ptr OBJ;
+	def tail = ptr OBJ;
+};
+
+def init = (HNDL hndl) ->
+;; def init = (hndl) -> 
+	
+	hndl.length = 0;
+	hndl.head = NULL;
+	hndl.tail = NULL;
+end;
+
+def add = (hndl, elem) -> {
+	
+	var _ptr = ptr (malloc (sizeof ptr)); ;; Datatypes in C can be arguments
+	
+};
+
+
+
+;;
+
+namespace test =
+|	word = () -> 
+		
+	end;
+
+|	slang = () -> 
+		
+	end;
