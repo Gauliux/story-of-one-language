@@ -945,7 +945,6 @@ def test_drive, () {
 
 DEF test_drive (a,x) ->
 {
-	
 	RETURN 10;
 }
 
@@ -995,15 +994,241 @@ def add = (hndl, elem) -> {
 	
 };
 
+;;
 
+def @Public Pepega = ;: type :; Object {
+	def @Public NAME = String;
+	def @Private AGE = Int;
+};
+
+def kill = (x,z) ->
+	return (int 12);
+	return (char 12);
+	return (false);
+end;
+
+;; kill def 10 return ;
+;; word: mem 10 * (BYTE);
+
+
+"snickers" = : ->a ->b {
+	
+	?: a == 10 && b == 10 ? ->
+		++a;
+	?;
+	
+	~ a;
+};
+
+int32 = (a) {
+	~ .4. a  
+}
+
+int32 20;
+
+"snickers" := FUNCTION ->a ->b {
+	
+}
+
+"test" := CONST 10
+
+.~ ;; (((snickers test test) (snickers test test) +) 10 -)
+
+
+def name = {
+	var name;
+	name = (input);
+	print "Hello";
+	print "\n";
+	loop (i < 10) {
+		i++;
+	}
+}
+
+;; new
+
+{
+	var prikol;
+	
+	for(){
+		var prikol; ;; not the same with previous; not like in the C;
+	
+	}
+}
+
+
+def Pepegus = type struct {
+	var X;
+	var Y;
+};
+
+new ass = Pepegus {10, 20};
+ass.X = 10;
+ass.Y = 20;
+
+;:
+Ключевое слово partial указывает, что другие части класса, структуры или 
+интерфейса могут быть определены в пространстве имен. Все части должны
+использовать ключевое слово partial. Для формирования окончательного типа
+все части должны быть доступны во время компиляции. Все части должны иметь
+одинаковые модификаторы доступа, например public, private и т. д.
+:;
+
+;; New way?
+
+"mysql" = _ import "mysql_connector.h"
+
+real "getID" = {
+
+	getID = _ mysql.Execute "TOP 1 SELECT * FROM agents;"
+	
+};
+
+x = 20 + _ getID _ * 40
+
+"pepegus" := 
+:: x = 20 
+:: y = _ lg ( _ exp x) 
+:: pepegus = x * y
+
+;; C moment:
+;; - + * / %
+;; && || !
+;; == >= <= != > < ;; !>
+;; | & ^ ~
+;; ---------------------
+
+;; My moment:
+;; '' ""
+;; @ $ #
+;; ::
+;; ---------------------
+
+;; -+*/%&|!^~=><
+
+
+"pepegus" := (x = 23) AND (pepegus = x)
+
+;;1
+"kill_me_please" := {
+
+	addx = 0;
+	addy = 0;
+	amtx = 1;
+	amty = 1;
+	
+	result = 0 * (@1>@2||@1<@2); ;; fake args
+
+	addx = (@1 % @2)*(@1 + @2 + @1 > @2); ;; fake args
+	
+	_glPushMatirx_;
+	_glLoadIdentity_;
+	[0,640, 640,0] glOrtho [-1,1];
+	
+} -> logical;
+
+;;2
+"kill_me_please" :=
+
+	(addx = 0) AND
+	(addy = 0) AND
+	(amtx = 1) AND
+	(amty = 1) AND
+
+	(result = 0 * (@1>@2||@1<@2) ;: fake args :;) AND
+
+	(addx = (@1 % @2)*(@1 + @2 + @1 > @2) ;: fake args:;) AND
+
+	(_glPushMatirx_) AND
+	(_glLoadIdentity_) AND
+	([0,640, 640,0] glOrtho [-1,1])
+
+;;3
+"kill_me_please" :=
+
+	addx = 0;
+	addy = 0;
+	amtx = 1;
+	amty = 1;
+
+	result = 0 * (@1>@2||@1<@2); ;; fake args
+
+	addx = (@1 % @2)*(@1 + @2 + @1 > @2); ;; fake args
+
+	_glPushMatirx_;
+	_glLoadIdentity_;
+	[0,640, 640,0] glOrtho [-1,1];_
+
+;;4.1
+"kill_me_please" -> logical := {
+	
+	
+};
+
+;; 4.2
+`kill_me_please` := {
+	
+	x = (28 `{ result = 40 } -> real` 30) + 20
+		
+} -> logical;
+_
+
+
+;; ===================================
+
+PRINT "X = " + TOSTRING(X) + CHAR(0x00)
+
+->
+
+PRINT 'X' ' ' '=' ' ' '1' '0' '\0'
+
+->
+
+SET PF, 1 ;; set print flag 1
+START PROGRAM 3 ;; does interuptions sound \
+				logical in VM context?
+;; every next byte after instruction \
+will be print out on screen, until death 0x00
 
 ;;
 
-namespace test =
-|	word = () -> 
-		
-	end;
+"SUM" := {
 
-|	slang = () -> 
-		
-	end;
+	result = @L + @R;
+
+} result -> integer;
+
+;:
+"СУММА" := ((
+
+	результат = %Л + %П
+
+)) целочисленный тип;
+:;
+
+X = 10 "SUM" 3
+
+_ print (_ toString X);
+
+->
+
+def SUM
+	SET R1, R1 + R2
+end
+
+SET R1, 10h
+SET R2, 3h
+CALL SUM
+
+PRINT TOSTRING(R1)
+
+-> 
+
+SET R1, 10h
+SET R2, 3h
+ADD R1, R2
+
+SET PF
+START PROGRAM 3
+
+;; =================================== 17.05.23
