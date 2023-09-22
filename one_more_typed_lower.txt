@@ -881,3 +881,841 @@ push [1000]
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⡄⠀⠘⣶⢋⡞⠁⠀⠀⢀⡴⠂⠀⠀⠀⠀⠹⣄⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇⠀⠀⠈⠻⢦⡀⠀⣰⠏⠀⠀⢀⡴⠃⢀⡄⠙⣆⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⡾⢷⡄⠀⠀⠀⠀⠉⠙⠯⠀⠀⡴⠋⠀⢠⠟⠀⠀⢹⡄
+====================================== 18.06.23
+
+
+
+$ something
+: length
+: zero 4
+
+$ person
+$ person:age
+: zero 4
+$ person:name
+: zero 20
+: end
+
+$ buff
+: zero 24
+
+set $person:age,89
+set $person:name,#'Steven'
+call $person:calc_age
+
+set $buff,$person
+
+cmp $person,buff
+
+
+create "snickers"
+: .zero 10
+create "snickers-length"
+: db 0x0A
+
+until ("snickers" at r0) ne "snickers-length" set ("snickers" at r0) 'h' = 6 bytes
+if ("scnikers" at 0x00) eq 10 set ("scnikers" at 0x00)
+
+to "snickers" at 5 set 'h'  = 6 bytes
+to ("snickers" at 5) set 'h' = 4 bytes
+
+
+
+add "a1"(0x0F) to "a2"(0x000000)
+
+mov "snickers":5 'h' = 3/4 bytes
+
+print "snickers"
+
+=============================
+
+"snickers" = 00F0 : 0...
+"scnikers-length" = 00FA = 10
+
+=============================
+
+
+to "shift" put 0
+to "counter" put 4
+to "hex-string" put "0x0000"
+
+$hex_loop
+	
+	to "counter" cmp 0
+	je $end
+	
+	to r16 from "temp16" get 2
+	ror "shift"
+	and 0x0F
+	add 0x30
+	cmp 0x39
+	jle $next_step
+	add 0x07
+
+$next_step
+	to ("hex-string" at 5)
+	sub "counter"
+	put r8
+	dec "counter"
+	jmp $hex_loop
+	
+$end
+
+loop 
+
+$ hex_loop
+	
+	loop 4
+		
+		
+		
+	loop-chek
+	
+	to "temp" 
+	step 4
+	at 8 at 5
+	
+	
+$ move_intoBX
+	
+	set #hexString+5 to "counter"
+	
+
+$ end_hex_loop
+
+
+======================================
+
+$ person_name
+: .bytes 20
+
+;;	10	11	12	13	14	15	16	17	18	19	1A	1B	1C	1D	1E	1F 20 21 22 23
+;;	10h	
+;;
+;;
+;;
+
+$ keyboard_input
+: .bytes 20
+
+;;	10	11	12	13	14	15	16	17	18	19	1A	1B	1C	1D	1E	1F 20 21 22 23
+;;	'A'	'S'	'S'	'C'	0Ah	
+;;
+;;
+;;
+
+to r8 set 0
+
+while $person_name at r8 ne 0x0A
+	to $person_name at r8 
+	set $keyboard_input at r8
+	inc r8
+loop-check
+
+
+step 1
+
+
+set-type "PERSON"
+to 6000:0000 set 
+
+==================================
+
+$ game_board
+: db 5 4 3 2 1 3 4 5
+: db 6 6 6 6 6 6 6 6
+: db 0 0 0 0 0 0 0 0
+: db 0 0 0 0 0 0 0 0
+: db 0 0 0 0 0 0 0 0
+: db 0 0 0 0 0 0 0 0
+: db 6 6 6 6 6 6 6 6
+: db 5 4 3 2 1 3 4 5
+
+$ keyboard_input
+: .bytes 4
+
+
+$ main_loop
+	
+	to 0000:0000
+	step "int8"
+	create "counter" set 0
+	
+	$ .get_input
+	
+	cmp "counter" with 4
+	je .end_input
+	
+	call get_char
+	to keyboard_input at "counter"
+	pop 1
+	to "counter" add 1
+	jmp .get_input
+	
+	$ .end_input
+	
+	while "counter" eq 4
+		call get_char
+		to keyboard_input at "counter"
+		pop 1
+		to "counter" add 1
+	end
+
+
+==================================
+
+
+step 1
+create-type "file-table-unit"
+
+to 6000:0000
+type "file-table-unit"
+create "file-1" set "other-file-unit"
+
+to a16 set 0xA000
+to b16 set 0x0000
+
+to @[a16,b16]
+type "person"
+to "age" set 20
+to "name" sets "Scnikers"
+
+type "int16"
+push 
+
+
+create-type "int8"
+	with 0
+	with 1
+end
+
+
+if "age" eq 20
+	
+end
+
+
+==================================
+
+new-session
+
+
+native ;len
+: define 0x00 0x00 0x00 0x00 0x00 
+;end
+
+to $ax_reg set 0x0FFF
+
+native 3
+: db 0xA0 ; mov_ax instruction
+$ ax_reg : db 0x00 0x00
+
+
+
+create-type "person"
+	with-len/8 		5
+	with/8 |name| 	8
+	with/8 |age|  	1
+eos
+
+
+to/32 	!data_frame	; 1000 0000
+type/8 	"person"	; 1
+to/16 	"age"		; 2
+set/8 	0x0A
+
+================================
+
+
+native ...
+: db ...
+...
+
+
+to 
+from-pointer 1000:0000
+
+
+$print_string
+
+while
+	
+end
+
+
+$string_hello
+: db "Hello from Kernel!", 0x00
+
+
+
+create-type "int64"
+	with 0
+	with 8
+eos
+
+
+create-type "typed-unit"
+	with 2
+	with-type "int64"
+	with-type "string"
+eos
+
+step / type
+sets 8
+: dw 0x0000 0x0000 0x0000 0x0000 0x0000 0x0000 0x0000 0x0000
+
+
+type "file-table-unit"
+
+to [2000] with-type "int64" add/tp [1000]
+
+to [1000 + 0000]
+type "table-unit"
+at "name" set/l 8 "MyFile.."
+at "start_sector" set/8 89
+at "end_sector" set/8 102
+
+add/tp "int64" [1000] with/tp "int32" [2000]
+
+to [1000]
+type/8 "int64" create/8 "something" -> to [1001] / [1002]
+step/8 1 set/l 8 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00
+
+to $"something" add $"something"
+
+: define !variables_table 1000
+: define !variables_base 2000
+to !variables_table
+type/8 "int64" create "int64"
+set/16 !variables_base
+
+===================================================
+
+
+create-type/l 0 0 8 ; set_type_descriptopn_size 8b
+
+create-type/l 1 0 8
+create-type/l 2 2 8 8
+
+type 2
+to [1000] at 2
+
+
+===================================================
+
+
+
+$int16
+: db 00 00
+
+$int32
+: db 00 00 00 00
+
+
+type "int16"
+to [$int16]
+add/t [$int32]
+; просто сложит по тому количеству байт, которое указно в выбранном типе данных :/
+; получается, что достаточно знать наименьший тип :/
+
+==================================================
+
+while
+
+end
+
+if ne from 
+
+end
+
+==================================================
+
+type "person"
+if the [1000] with [2000] ne
+	
+end
+
+if the [1000] with [2000] ne
+	if the [2000] with [100F] with [100] eq 
+		
+	eos
+end
+
+while			; add 16-bit address to stack of recalls
+the/pr a16 		; set to value-register value of a8
+at/r c8 		; add to 
+with/8 0 
+ne
+	print-@/r
+	inc c8
+end
+
+Зависимые
+...
+to
+from
+mov
+swap
+add
+sub
+and
+or
+xor
+...
+Самостоятельные
+...
+push
+pop
+with
+inc
+dec
+inv
+...
+...
+while
+if
+eos
+end
+...
+
+
+person a; &a = 1000
+a.name = "Snickers"
+a.age = 32
+
+person b;
+b.name = a.name;
+
+type "person"
+to [1000] at "name" set/l "Snickers"
+at "age" set 32
+
+type "person"
+to [1009] at "name"
+set [1000]:"name"
+set/p16off
+
+type "person" to [1009] at "name"
+type "person":"name" set [1000]
+
+type "person" to [1009]::"name" at "name" set [1000]::"name"
+
+type "person"
+to [1009] at "name"
+~ set [1000] at "name" ; != [1000].name 
+
+А что если at будет срабатывать только при вызове инструкции действия?
+
+type "person" at "name"
+to [1009] set [1000]
+
+to/p16 (!a at "name") set/p16 (!b at "name")
+
+type "person"
+
+: define a 1000
+: define b 2000
+: define c 2000
+
+; type-person
+: define "name"	0
+: define "age"	8
+
+to [!a] at "name" set "FUCK!"
+to [!b] at "name" set "FUCK!"
+
+
+create-type "int64" 0 8
+
+create-type "int128" 0 16
+
+create-type 
+"user-id" :len-type
+	"int64"		: "firts"
+	"int128"	: "second"
+	
+type "user-id":"first":"name"
+
+"user-id"	"first" : "int64"
+			"second" : "int128"
+			
+
+
+; person type
+: define "person" 4
+: define "name" 1
+: define "id"	2
+: define "age"	3
+
+create-type "person" 3 "strptr" "user-id" "int16"
+
+type "person"
+to [1000] at "name"
+
+
+========================================================
+
+person a, b
+a.name = "Snickers"
+a.age = 32
+a.id = {1, 2}
+b.age = a.age
+
+type "person"
+to [1000] 
+at "age" set 32
+at "name" set "Snickers"
+at "id"	
+
+========================================================
+
+int a = 120
+
+to Ar32 set 0x60008000
+type "int32" 
+to [1000:8000] set Ar32
+
+type "ptr32"
+to [1000:8000] set 0x60008000
+
+type "int64" 
+to [[1000:8000]] set 120
+
+========================================================
+
+
+from 0r64 push
+to 1r64 pop
+
+push 0r64
+pop 0r64
+
+type "snickers"
+push [1000]
+
+переместить из 0р64 в 1р64 ;
+положить-на-стэк из-адреса 1000 тип "валюта" ;
+====================================== 20.06.23
+0x00	nop
+0x01	hlt
+0x02	to/R
+0x03	to/P
+0x04	to/aR
+0x05	to/aP
+0x06	to/pR
+0x07	to/pP
+0x08	to/a16
+0x09	to/a32
+0x0A	to/p16
+0x0B	to/p32
+0x0C	from/R
+0x0D	from/P
+0x0E	from/aR
+0x0F	from/aP
+0x10	from/pR
+0x11	from/pP
+0x12	from/a16
+0x13	from/a32
+0x14	from/p16
+0x15	from/p32
+0x16	step/8
+0x17	step/16
+0x18	at/R
+0x19	at/aR
+0x1A	at/pR
+0x1B	at/8
+0x1C	at/16
+0x1D	type/8
+0x1E	type/16
+0x1F	create-type/l
+0x20	set/R
+0x21	set/P
+0x22	set/aR
+0x23	set/aP
+0x24	set/pR
+0x25	set/pP
+0x26	set/a16
+0x27	set/a32
+0x28	set/p16
+0x29	set/p32
+0x2A	set/l
+0x2B	set/8
+0x2C	set/16
+0x2D	set/32
+0x2E	set/64
+0x2F	mov/8
+0x30	mov/16
+0x31	swap/8
+0x32	swap/16
+0x33	while
+0x34	if
+0x35	eos
+0x36	end
+0x37	eq
+0x38	ne
+0x39	lr
+0x3A	gr
+0x3B	le
+0x3C	ge
+0x3D	inc/R
+0x3E	inc/P
+0x3F	inc/aR
+0x40	inc/aP
+0x41	inc/pR
+0x42	inc/pP
+0x43	inc/a16
+0x44	inc/a32
+0x45	inc/p16
+0x46	inc/p32
+0x47	inc
+0x48	dec/R
+0x49	dec/P
+0x4A	dec/aR
+0x4B	dec/aP
+0x4C	dec/pR
+0x4D	dec/pP
+0x4E	dec/a16
+0x4F	dec/a32
+0x50	dec/p16
+0x51	dec/p32
+0x52	dec
+0x53	push/R
+0x54	push/P
+0x55	push/aR
+0x56	push/aP
+0x57	push/pR
+0x58	push/pP
+0x59	push/a16
+0x5A	push/a32
+0x5B	push/p16
+0x5C	push/p32
+0x5D	push
+0x5E	pop/R
+0x5F	pop/P
+0x60	pop/aR
+0x61	pop/aP
+0x62	pop/pR
+0x63	pop/pP
+0x64	pop/a16
+0x65	pop/a32
+0x66	pop/p16
+0x67	pop/p32
+0x68	pop
+0x69	add/R
+0x6A	add/P
+0x6B	add/aR
+0x6C	add/aP
+0x6D	add/pR
+0x6E	add/pP
+0x6F	add/a16
+0x70	add/a32
+0x71	add/p16
+0x72	add/p32
+0x73	add/8
+0x74	add/16
+0x75	add/32
+0x76	add/64
+0x77	sub/R
+0x78	sub/P
+0x79	sub/aR
+0x7A	sub/aP
+0x7B	sub/pR
+0x7C	sub/pP
+0x7D	sub/a16
+0x7E	sub/a32
+0x7F	sub/p16
+0x80	sub/p32
+0x81	sub/8
+0x82	sub/16
+0x83	sub/32
+0x84	sub/64
+0x85	and/R
+0x86	and/P
+0x87	and/aR
+0x88	and/aP
+0x89	and/pR
+0x8A	and/pP
+0x8B	and/a16
+0x8C	and/a32
+0x8D	and/p16
+0x8E	and/p32
+0x8F	and/8
+0x90	and/16
+0x91	and/32
+0x92	and/64
+0x93	or/R
+0x94	or/P
+0x95	or/aR
+0x96	or/aP
+0x97	or/pR
+0x98	or/pP
+0x99	or/a16
+0x9A	or/a32
+0x9B	or/p16
+0x9C	or/p32
+0x9D	or/8
+0x9E	or/16
+0x9F	or/32
+0xA0	or/64
+0xA1	xor/R
+0xA2	xor/P
+0xA3	xor/aR
+0xA4	xor/aP
+0xA5	xor/pR
+0xA6	xor/pP
+0xA7	xor/a16
+0xA8	xor/a32
+0xA9	xor/p16
+0xAA	xor/p32
+0xAB	xor/8
+0xAC	xor/16
+0xAD	xor/32
+0xAE	xor/64
+0xAF	mul/R
+0xB0	mul/P
+0xB1	mul/aR
+0xB2	mul/aP
+0xB3	mul/pR
+0xB4	mul/pP
+0xB5	mul/a16
+0xB6	mul/a32
+0xB7	mul/p16
+0xB8	mul/p32
+0xB9	mul/8
+0xBA	mul/16
+0xBB	mul/32
+0xBC	mul/64
+0xBD	div/R
+0xBE	div/P
+0xBF	div/aR
+0xC0	div/aP
+0xC1	div/pR
+0xC2	div/pP
+0xC3	div/a16
+0xC4	div/a32
+0xC5	div/p16
+0xC6	div/p32
+0xC7	div/8
+0xC8	div/16
+0xC9	div/32
+0xCA	div/64
+0xCB	mod/R
+0xCC	mod/P
+0xCD	mod/aR
+0xCE	mod/aP
+0xCF	mod/pR
+0xD0	mod/pP
+0xD1	mod/a16
+0xD2	mod/a32
+0xD3	mod/p16
+0xD4	mod/p32
+0xD5	mod/8
+0xD6	mod/16
+0xD7	mod/32
+0xD8	mod/64
+0xD9	jmp/R
+0xDA	jmp/P
+0xDB	jmp/aR
+0xDC	jmp/aP
+0xDD	jmp/pR
+0xDE	jmp/pP
+0xDF	jmp/a16
+0xE0	jmp/a32
+0xE1	jmp/p16
+0xE2	jmp/p32
+0xE3	jmp/16
+0xE4	jmp/32
+0xE5	native/l
+0xE6	lsh/8
+0xE7	rsh/8
+0xE8	ror/8
+0xE9	rol/8
+0xFF	print-@
+======================================
+
+push 00 ; ah
+push 03 ; al
+push 10 ; int
+int 80
+
+push 0B ; ah
+push 00 ; bh
+push 03 ; bl
+push 10 ; int
+int 80
+
+step 1
+
+to a16 set 0000
+
+while from $menu_string at a16 ne 00
+	print-@ ; specialized
+	inc a16
+end	
+
+$ input_loop
+
+	to a16 set 0000
+
+	while from $keyboard_input at a8
+		get-key ; specialized
+		pop 1
+		ne 0xA
+		inc a8
+	end
+
+$ identify_command
+
+	from $keyboard_input
+	
+	if eq 'f'
+		jmp $print_success
+	end
+	
+	jmp $print_failure
+
+$ print_success
+
+	while from $message_success at a16 ne 00
+		print-@ ; specialized
+		inc a16
+	end	
+	jmp $input_loop
+
+$ print_failure
+
+	while from $message_failure at a16 ne 00
+		print-@ ; specialized
+		inc a16
+	end	
+	jmp $input_loop
+
+
+$ menu_string
+: db '---------------------------------' 0xA 0xD
+: db 'Kernel Booted!' 0xA 0xD
+: db '---------------------------------' 0xA 0xD
+: db 'F) File & Program Browser/Loader', 0xA, 0xD
+: db '---------------------------------' 0xA 0xD
+: db 0
+
+$ message_success
+: db 'Command ran successfully!', 0xA, 0xD, 0
+
+$ message_failure
+: db 'Oops! Something went wrong :(', 0xA, 0xD, 0
+
+$ keyboard_input
+======================================
+to/R R0r8 set/8 0
+to/R R1r9 set/8 0
+
+while to/R R0r8 from/a16 #Welcome_string ne
+	print-@
+end
+
+hlt
+
+$Welcome_string
+57h 65h 6Ch 63h 6Fh 6Dh 65h 20h 69h 6Eh 20h 74h 6Fh 20h 74h 68h 65h 20h 41h 42h 53h 54h 52h 41h 43h 54h 20h 4Dh 41h 43h 48h 49h 4Eh 45h 21h 00h
+======================================
